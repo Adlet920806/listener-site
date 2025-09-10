@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Confidential Listener — Премиальные онлайн-сессии</title>
+  <meta name="description" content="Конфиденциальные 60-минутные онлайн-сессии: выговориться, снять стресс, навести ясность. RU/EN/AR · 1000 AED/час · WhatsApp + Calendly."/>
+  <meta name="theme-color" content="#0f172a"/>
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <style>
+    :root{
+      --bg:#0b1220; --ink:#e2e8f0; --muted:#94a3b8; --line:#1f2937;
+      --brand:#1d4ed8; --brand2:#3b82f6; --card:#0f172a; --gold:#d4af37;
+    }
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:radial-gradient(1200px 520px at 70% -10%, #0b5, transparent 65%),var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto}
+    a{color:#93c5fd;text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1120px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:#0b1220cc;border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(10px);z-index:20}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .logo{font-weight:900;letter-spacing:.2px;color:#fff;text-decoration:none}
+    .lang{display:flex;gap:8px;align-items:center}
+    .lang button{background:#0b1220;border:1px solid var(--line);color:var(--ink);padding:8px 10px;border-radius:10px;cursor:pointer;font-weight:700}
+    .lang button.active{border-color:#60a5fa;color:#bfdbfe}
+    .hero{padding:96px 0}
+    .badge{display:inline-block;background:rgba(96,165,250,.15);color:#bfdbfe;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}
+    h1{margin:10px 0 12px;font-size:46px;line-height:1.06}
+    .lead{color:var(--muted);font-size:18px;margin:0 0 22px}
+    .btn{display:inline-block;padding:14px 20px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;font-weight:800;text-decoration:none}
+    .btn.ghost{background:transparent;color:#93c5fd;border:2px solid #60a5fa}
+    .grid{display:grid;gap:22px} @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr} .grid-3{grid-template-columns:repeat(3,1fr)}}
+    section{padding:56px 0;border-top:1px solid var(--line)}
+    .card{background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid #1e293b;border-radius:18px;padding:22px;box-shadow:0 28px 80px rgba(0,0,0,.35)}
+    .kpis{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+    .pill{background:#0b1a36;border:1px solid #203a78;border-radius:14px;padding:10px 14px;font-weight:700;color:#bfdbfe}
+    .quote{font-style:italic;color:#dbeafe}
+    [data-lang]{display:none}
+    [data-lang].active{display:block}
+    .rtl{direction:rtl;text-align:right}
+    /* FAQ */
+    details{background:#0c1426;border:1px solid #1f2a44;border-radius:14px;padding:14px 16px;margin:10px 0}
+    summary{cursor:pointer;font-weight:700}
+    footer{padding:40px 0;color:#94a3b8;text-align:center;border-top:1px solid var(--line)}
+    /* floating WA */
+    .fab{position:fixed;right:18px;bottom:18px;z-index:30}
+    .fab a{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;text-decoration:none;font-weight:900;box-shadow:0 10px 24px rgba(22,163,74,.35)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">Adilet Moldabay · Confidential Listener</a>
+      <div class="lang">
+        <button data-switch="ru" class="active">RU</button>
+        <button data-switch="en">EN</button>
+        <button data-switch="ar">AR</button>
+        <a class="btn ghost" href="https://wa.me/77073398872" target="_blank" rel="noopener" style="margin-left:8px">WhatsApp</a>
+        <a class="btn" id="cal-btn" href="#">Calendly</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== RU ===== -->
+    <section class="hero" data-lang="ru" class="active">
+      <div class="container grid grid-2">
+        <div>
+          <span class="badge">Премиальные конфиденциальные сессии</span>
+          <h1>Выговоритесь. Без масок. Без осуждения.</h1>
+          <p class="lead">60 минут, чтобы снять напряжение и навести ясность. Онлайн · Из любой точки мира · Полная конфиденциальность.</p>
+          <div class="kpis">
+            <div class="pill">1000 AED / 60 мин</div>
+            <div class="pill">RU · EN · KZ · TR</div>
+            <div class="pill">Zoom / WhatsApp / Telegram</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+            <a class="btn" href="https://wa.me/77073398872" target="_blank">Записаться в WhatsApp</a>
+            <a class="btn ghost" href="#calendar">Бронь через календарь</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Почему это работает</h3>
+          <ul>
+            <li>Безопасное пространство: никаких записей, оценок или советов «сверху».</li>
+            <li>Структурирующие вопросы — помогают услышать свои мысли и решения.</li>
+            <li>Спокойный темп — час, который принадлежит только вам.</li>
+          </ul>
+          <p class="muted">Языки: русский, английский (B1), казахский, базовый турецкий.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EN ===== -->
+    <section class="hero" data-lang="en">
+      <div class="container grid grid-2">
+        <div>
+          <span class="badge">Premium confidential sessions</span>
+          <h1>Speak out. No masks. No judgement.</h1>
+          <p class="lead">60 minutes to release pressure and gain clarity. Online · Worldwide · Full confidentiality.</p>
+          <div class="kpis">
+            <div class="pill">1000 AED / 60 min</div>
+            <div class="pill">RU · EN · KZ · TR</div>
+            <div class="pill">Zoom / WhatsApp / Telegram</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+            <a class="btn" href="https://wa.me/77073398872" target="_blank">Book via WhatsApp</a>
+            <a class="btn ghost" href="#calendar">Book via calendar</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Why it works</h3>
+          <ul>
+            <li>Safe, judgement-free space — no recording, no preaching.</li>
+            <li>Clarifying questions to help you hear yourself.</li>
+            <li>Calm pace — the hour belongs to you.</li>
+          </ul>
+          <p class="muted">Languages: Russian, English (B1), Kazakh, basic Turkish.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AR ===== -->
+    <section class="hero rtl" data-lang="ar">
+      <div class="container grid grid-2">
+        <div>
+          <span class="badge">جلسات سرّية متميّزة</span>
+          <h1>تكلّم بلا أقنعة وبلا أحكام.</h1>
+          <p class="lead">٦٠ دقيقة لتخفيف التوتر واستعادة الوضوح. عبر الإنترنت · متاحة عالميًا · سرّية تامّة.</p>
+          <div class="kpis">
+            <div class="pill">١٠٠٠ درهم / ٦٠ دقيقة</div>
+            <div class="pill">RU · EN · KZ · TR</div>
+            <div class="pill">Zoom / WhatsApp / Telegram</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+            <a class="btn" href="https://wa.me/77073398872" target="_blank">الحجز عبر واتساب</a>
+            <a class="btn ghost" href="#calendar">الحجز عبر التقويم</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">لماذا تنجح هذه الجلسات؟</h3>
+          <ul>
+            <li>مساحة آمنة بلا أحكام ولا تسجيل.</li>
+            <li>أسئلة توضيحية تساعدك على سماع نفسك.</li>
+            <li>إيقاع هادئ — الساعة لك وحدك.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section id="reviews">
+      <div class="container">
+        <h2>🎤 <span data-lang="ru" class="active">Отзывы</span><span data-lang="en">Testimonials</span><span data-lang="ar" class="rtl">آراء العملاء</span></h2>
+        <div class="grid grid-3">
+          <div class="card"><p class="quote">«Ушла тревога перед важной встречей. Чётко, спокойно, без давления.»</p><p class="muted">— А., Dubai</p></div>
+          <div class="card"><p class="quote">“He held space perfectly. I left with 3 clear actions and relief.”</p><p class="muted">— M., London</p></div>
+          <div class="card rtl"><p class="quote">«شعرت بالأمان لأول مرة منذ فترة. شكراً على الإصغاء الحقيقي.»</p><p class="muted">— س., أبوظبي</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container grid grid-2">
+        <div>
+          <h2>❓ <span data-lang="ru" class="active">FAQ — частые вопросы</span><span data-lang="en">FAQ</span><span data-lang="ar" class="rtl">الأسئلة الشائعة</span></h2>
+          <details><summary><span data-lang="ru" class="active">Это терапия?</span><span data-lang="en">Is this therapy?</span><span data-lang="ar" class="rtl">هل هذا علاج نفسي؟</span></summary>
+            <p class="muted" data-lang="ru" class="active">Нет. Это услуга конфиденциального слушания и наведения ясности. Не медуслуга.</p>
+            <p class="muted" data-lang="en">No. It’s confidential listening & clarity coaching. Not medical service.</p>
+            <p class="muted rtl" data-lang="ar">لا. هذه خدمة استماع سرّي ومساعدة على الوضوح، وليست خدمة طبية.</p>
+          </details>
+          <details><summary><span data-lang="ru" class="active">Как идёт оплата?</span><span data-lang="en">How do I pay?</span><span data-lang="ar" class="rtl">كيف تتمّ الدفعة؟</span></summary>
+            <p class="muted" data-lang="ru" class="active">Через мессенджер после брони (1000 AED / час). Возможна предоплата.</p>
+            <p class="muted" data-lang="en">Via messenger after booking (1000 AED / hour). Prepayment possible.</p>
+            <p class="muted rtl" data-lang="ar">عبر الرسائل بعد الحجز (١٠٠٠ درهم/ساعة). ممكن دفعة مسبقة.</p>
+          </details>
+          <details><summary><span data-lang="ru" class="active">Можно анонимно?</span><span data-lang="en">Anonymous?</span><span data-lang="ar" class="rtl">هل يمكن بصورة مجهولة؟</span></summary>
+            <p class="muted" data-lang="ru" class="active">Да. Можно без видео и без имени.</p>
+            <p class="muted" data-lang="en">Yes. Audio-only and no name is fine.</p>
+            <p class="muted rtl" data-lang="ar">نعم، يمكن بدون فيديو وبدون اسم.</p>
+          </details>
+        </div>
+
+        <!-- Гарантия конфиденциальности -->
+        <div class="card">
+          <h2>🔒 <span data-lang="ru" class="active">Гарантия конфиденциальности</span><span data-lang="en">Privacy Guarantee</span><span data-lang="ar" class="rtl">ضمان الخصوصية</span></h2>
+          <ul>
+            <li><b>Никаких записей.</b> Сессии не записываются и не пересказываются третьим лицам.</li>
+            <li><b>Только вы и я.</b> Без оценок, без навязывания решений.</li>
+            <li><b>Уважение границ.</b> Можно прервать тему или встречу в любой момент.</li>
+          </ul>
+          <p class="muted" data-lang="en">No recording. No sharing. Your boundaries are respected.</p>
+          <p class="muted rtl" data-lang="ar">لا تسجيل. لا مشاركة. احترام كامل لحدودك.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Бронирование -->
+    <section id="calendar">
+      <div class="container">
+        <h2>📅 <span data-lang="ru" class="active">Онлайн-бронирование</span><span data-lang="en">Booking</span><span data-lang="ar" class="rtl">الحجز</span></h2>
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/adlet92?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=1d4ed8"
+             style="min-width:320px;height:700px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 Adilet Moldabay — Confidential Listener · <a href="mailto:adlet.9206@mail.ru">adlet.9206@mail.ru</a></footer>
+
+  <!-- Floating WhatsApp -->
+  <div class="fab"><a href="https://wa.me/77073398872" target="_blank" aria-label="WhatsApp">💬</a></div>
+
+  <script>
+    // Переключение языков
+    const btns = document.querySelectorAll('.lang button');
+    const langBlocks = document.querySelectorAll('[data-lang]');
+    function setLang(l){
+      document.querySelectorAll('section.hero').forEach(sec=>{
+        const isMatch = sec.getAttribute('data-lang')===l;
+        sec.style.display = isMatch ? '' : 'none';
+      });
+      langBlocks.forEach(el=>{
+        if(el.tagName==='SECTION') return;
+        el.classList.toggle('active', el.getAttribute('data-lang')===l);
+      });
+      document.documentElement.lang = l;
+      document.documentElement.dir  = (l==='ar' ? 'rtl' : 'ltr');
+      btns.forEach(b=>b.classList.toggle('active', b.getAttribute('data-switch')===l));
+      localStorage.setItem('site_lang', l);
+    }
+    btns.forEach(b=>b.addEventListener('click', ()=> setLang(b.getAttribute('data-switch'))));
+    setLang(localStorage.getItem('site_lang') || 'ru');
+
+    // Calendly popup
+    document.getElementById('cal-btn').addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.Calendly) Calendly.initPopupWidget({ url: 'https://calendly.com/adlet92' });
+    });
+  </script>
+</body>
+</html>
