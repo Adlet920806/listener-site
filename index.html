@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Confidential Listener — ULTRA</title>
+  <meta name="description" content="Живые отзывы из Google Sheets, поиск, фильтры по языку, сортировка, пагинация и встроенная форма. WhatsApp + Calendly."/>
+  <meta name="theme-color" content="#0f172a"/>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <style>
+    :root{--bg:#0b1220;--ink:#e2e8f0;--muted:#94a3b8;--line:#1f2937;--brand:#1d4ed8;--brand2:#3b82f6;--card:#0f172a;--pill-bg:#0b1220;--pill-border:#334155;--pill-ink:#e2e8f0}
+    .light:root,.light{--bg:#f8fafc;--ink:#0b1220;--muted:#334155;--line:#e2e8f0;--brand:#2563eb;--brand2:#60a5fa;--card:#ffffff;--pill-bg:#ffffff;--pill-border:#cbd5e1;--pill-ink:#0b1220}
+    *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto}
+    a{color:#1d4ed8;text-decoration:none}a:hover{text-decoration:underline}
+    .container{max-width:1120px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(10px);z-index:20}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .logo{font-weight:900;letter-spacing:.2px;color:var(--ink);text-decoration:none}
+    .btn{display:inline-block;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;font-weight:800;text-decoration:none;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+    section{padding:48px 0;border-top:1px solid var(--line)}
+    .grid{display:grid;gap:22px}@media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--card) 90%,transparent));border:1px solid #1e293b22;border-radius:18px;padding:22px;box-shadow:0 28px 80px rgba(0,0,0,.08)}
+    .quote{font-style:italic;color:color-mix(in srgb,var(--ink) 90%, #93c5fd)}
+    footer{padding:36px 0;color:var(--muted);text-align:center;border-top:1px solid var(--line)}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 16px}
+    .pill{padding:8px 14px;border:1px solid var(--pill-border);border-radius:999px;background:var(--pill-bg);color:var(--pill-ink);cursor:pointer}
+    .pill.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;border-color:transparent;font-weight:800}
+    .muted{color:var(--muted)}
+    .right{margin-left:auto}
+    .input{background:var(--pill-bg);border:1px solid var(--pill-border);border-radius:12px;padding:10px 14px;color:var(--ink);min-width:240px}
+    .counter{font-weight:700;color:var(--brand2)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">Adilet Moldabay · Reviews</a>
+      <div class="switch">
+        <button id="theme-toggle" class="btn ghost">🌙/☀️ Theme</button>
+        <a class="btn" href="https://wa.me/77073398872?utm_source=site&utm_medium=cta&utm_campaign=reviews" target="_blank">WhatsApp</a>
+        <a class="btn" id="cal-btn" href="#">Calendly</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- LIVE REVIEWS -->
+    <section id="live-reviews">
+      <div class="container">
+        <h2>🎤 Свежие отзывы</h2>
+
+        <div class="toolbar">
+          <span class="muted">Источник:</span>
+          <button class="pill" data-source="approved">Approved (рекоменд.)</button>
+          <button class="pill" data-source="all">Все ответы</button>
+
+          <span class="muted right">Фильтр по языку:</span>
+          <button class="pill lang active" data-lang="all">All</button>
+          <button class="pill lang" data-lang="ru">RU</button>
+          <button class="pill lang" data-lang="en">EN</button>
+          <button class="pill lang" data-lang="ar">AR</button>
+        </div>
+
+        <div class="toolbar">
+          <input id="search" class="input" placeholder="Поиск: текст, имя, город…" />
+          <select id="sort" class="input">
+            <option value="desc">Сначала новые</option>
+            <option value="asc">Сначала старые</option>
+          </select>
+          <span class="counter" id="counter">Найдено: 0</span>
+        </div>
+
+        <div id="reviews-list" class="grid grid-3"></div>
+
+        <div class="toolbar" style="justify-content:center">
+          <button id="load-more" class="pill">Показать ещё</button>
+        </div>
+        <p class="muted" id="empty-hint" style="display:none">Пока нет отзывов для выбранного фильтра.</p>
+      </div>
+    </section>
+
+    <!-- LEAVE REVIEW FORM -->
+    <section id="leave-review">
+      <div class="container">
+        <h2>📝 Оставить отзыв</h2>
+        <div class="card" style="padding:0;overflow:hidden">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe9OwCPBUFb7zbAnfwbv9GpjApY1u2bhVu4cDWVz36sOCQoHQ/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendly (optional) -->
+    <section id="calendar">
+      <div class="container">
+        <h2>📅 Бронь (Calendly)</h2>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/adlet92?utm_source=site&utm_medium=cta&utm_campaign=reviews&hide_event_type_details=1&hide_gdpr_banner=1&primary_color=1d4ed8" style="min-width:320px;height:700px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© Confidential Listener</footer>
+
+  <script>
+    // Theme toggle
+    if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
+    document.getElementById('theme-toggle').addEventListener('click', ()=>{
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light':'dark');
+    });
+
+    // Calendly popup with UTM
+    document.getElementById('cal-btn').addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.Calendly) Calendly.initPopupWidget({ url:'https://calendly.com/adlet92?utm_source=site&utm_medium=cta&utm_campaign=reviews' });
+    });
+
+    // === SETTINGS ===
+    const CSV_ALL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR81R_A2ZSkrZCVhzB05-UXTHwisk03MxN1oSuNkyHjS6vgv2CmblloD8skyJR16CK9YbGQG-KPg7VB/pub?output=csv";
+    const CSV_APPROVED = "";
+    const PAGE_SIZE = 6;
+
+    // === STATE ===
+    let allRows = [];
+    let viewRows = [];
+    let currentLang = "all";
+    let page = 1;
+    let source = "all";
+    let query = "";
+    let sortDir = "desc";
+
+    // Auto-language filter by browser
+    (function initLangFromBrowser(){
+      const nav = (navigator.language || 'ru').slice(0,2).toLowerCase();
+      if(['ru','en','ar'].includes(nav)) {
+        currentLang = nav;
+        document.querySelectorAll('.lang').forEach(b=>b.classList.toggle('active', b.getAttribute('data-lang')===nav));
+      }
+    })();
+
+    function parseCSV(text) {
+      return text.trim().split(/\r?\n/).map(row =>
+        row.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(v => v.replace(/^"|"$/g, ''))
+      );
+    }
+
+    function mapIndexes(header) {
+      return {
+        ts: header.findIndex(h => /time|timestamp|время|дата/i.test(h)),
+        name: header.findIndex(h => /имя|name/i.test(h)),
+        city: header.findIndex(h => /город|city/i.test(h)),
+        lang: header.findIndex(h => /язык|lang/i.test(h)),
+        text: header.findIndex(h => /отзыв|review/i.test(h)),
+      };
+    }
+
+    function normalize(s) { return (s||'').toString().toLowerCase(); }
+
+    function applyFilters() {
+      if (!allRows.length) return;
+      const header = allRows[0];
+      const idx = mapIndexes(header);
+      let rows = allRows.slice(1);
+
+      if (currentLang !== 'all' && idx.lang !== -1) {
+        rows = rows.filter(r => normalize(r[idx.lang]) === currentLang);
+      }
+
+      const q = normalize(query);
+      if (q) {
+        rows = rows.filter(r => {
+          const text = normalize(idx.text!==-1? r[idx.text]: '');
+          const name = normalize(idx.name!==-1? r[idx.name]: '');
+          const city = normalize(idx.city!==-1? r[idx.city]: '');
+          return text.includes(q) || name.includes(q) || city.includes(q);
+        });
+      }
+
+      rows = (sortDir==='desc') ? rows.reverse() : rows;
+
+      viewRows = rows;
+      page = 1;
+      renderPage();
+      updateCounter();
+    }
+
+    function updateCounter() {
+      const el = document.getElementById('counter');
+      if (!el) return;
+      el.textContent = "Найдено: " + viewRows.length + " отзывов";
+    }
+
+    function renderPage() {
+      const wrap = document.getElementById('reviews-list');
+      const empty = document.getElementById('empty-hint');
+      const moreBtn = document.getElementById('load-more');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      if (empty) empty.style.display = 'none';
+
+      if (!viewRows.length) {
+        if (empty) empty.style.display = 'block';
+        if (moreBtn) moreBtn.style.display = 'none';
+        return;
+      }
+
+      const header = allRows[0];
+      const idx = mapIndexes(header);
+      const end = Math.min(page*PAGE_SIZE, viewRows.length);
+
+      for (let i=0; i<end; i++) {
+        const r = viewRows[i];
+        const text = (r[idx.text] || '').replace(/"/g, '&quot;');
+        const name = r[idx.name] || 'Анонимно';
+        const city = r[idx.city] || '';
+        const lang = r[idx.lang] || '';
+        const ts   = r[idx.ts]   || '';
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <p class="quote">“${text}”</p>
+          <p class="muted">— ${name}${city ? ', ' + city : ''}${lang ? ' · ' + lang : ''}</p>
+          <p class="muted" style="opacity:.6;font-size:12px">${ts}</p>
+        `;
+        wrap.appendChild(card);
+      }
+
+      if (moreBtn) moreBtn.style.display = (end < viewRows.length) ? 'inline-block' : 'none';
+    }
+
+    async function loadSource() {
+      try {
+        const url = (source==='approved' && CSV_APPROVED) ? CSV_APPROVED : CSV_ALL;
+        if (!url) return;
+        const res = await fetch(url, { cache: 'no-store' });
+        const txt = await res.text();
+        allRows = parseCSV(txt);
+        applyFilters();
+        setActive('[data-source]', source, 'data-source');
+      } catch(e) {
+        console.error('Ошибка загрузки CSV:', e);
+      }
+    }
+
+    function setActive(selector, value, attr='data-lang') {
+      document.querySelectorAll(selector).forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute(attr)===value);
+      });
+    }
+
+    document.querySelectorAll('.lang').forEach(btn => btn.addEventListener('click', () => {
+      currentLang = btn.getAttribute('data-lang');
+      setActive('.lang', currentLang);
+      applyFilters();
+    }));
+
+    document.querySelectorAll('[data-source]').forEach(btn => btn.addEventListener('click', () => {
+      source = btn.getAttribute('data-source');
+      loadSource();
+    }));
+
+    const search = document.getElementById('search');
+    let t = null;
+    if (search) {
+      search.addEventListener('input', () => {
+        clearTimeout(t);
+        t = setTimeout(() => { query = search.value; applyFilters(); }, 200);
+      });
+    }
+
+    const sortSel = document.getElementById('sort');
+    if (sortSel) sortSel.addEventListener('change', () => { sortDir = sortSel.value; applyFilters(); });
+
+    document.getElementById('load-more')?.addEventListener('click', () => { page++; renderPage(); });
+
+    document.addEventListener('DOMContentLoaded', () => { loadSource(); });
+  </script>
+</body>
+</html>
