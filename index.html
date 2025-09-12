@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Confidential Listener — ULTRA</title>
+  <meta name="description" content="Конфиденциальный слушатель: моментальная запись, отзывы в реальном времени, поддержка RU/EN/AR."/>
+  <meta property="og:title" content="Конфиденциальный слушатель — час свободы для мыслей"/>
+  <meta property="og:description" content="Запишитесь на беседу. Без советов. Без оценки. Только поддержка."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0b1220/e2e8f0&text=Confidential+Listener"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#090f1c; --panel:#0f172a; --ink:#e6edf7; --muted:#9fb0c8; --line:#1f2a40;
+      --brand:#1d4ed8; --brand2:#60a5fa; --good:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+    }
+    *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Segoe UI,Roboto}
+    a{color:#93c5fd;text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1180px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;z-index:30;background:#0b1220bf;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{font-weight:900;letter-spacing:.3px;color:#fff}
+    .tag{font-size:12px;padding:6px 10px;border:1px solid #2b3a59;border-radius:999px;color:#c7d2fe;background:#0b1220}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;border:1px solid #2b3a59;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;font-weight:800}
+    .btn.secondary{background:transparent;color:#dbeafe}
+    .hero{padding:42px 0 10px}
+    .hero h1{font-size:44px;line-height:1.05;margin:8px 0}
+    .hero p{color:var(--muted);max-width:780px}
+    .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .langbar button{padding:8px 12px;border-radius:10px;border:1px solid #2b3a59;background:#0b1220;color:#cbd5e1;cursor:pointer}
+    .langbar button.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;border-color:transparent;font-weight:800}
+    section{padding:36px 0;border-top:1px solid var(--line)}
+    .card{background:linear-gradient(180deg,var(--panel),#0b1220);border:1px solid #1e293b66;border-radius:20px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+    .grid{display:grid;gap:22px} @media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)} .grid-2{grid-template-columns:repeat(2,1fr)}}
+    .small{font-size:12px;color:var(--muted)}
+    /* Tabs */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid #2b3a59;background:#0b1220;color:#cbd5e1;cursor:pointer}
+    .tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;border-color:transparent;font-weight:800}
+    /* Reviews */
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 16px}
+    .input{background:#0b1220;border:1px solid #2b3a59;border-radius:12px;padding:10px 14px;color:#e2e8f0;min-width:240px}
+    .pill{padding:8px 12px;border:1px solid #2b3a59;border-radius:999px;background:#0b1220;color:#cbd5e1;cursor:pointer}
+    .pill.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#081018;border-color:transparent;font-weight:800}
+    .quote{font-style:italic;color:#dbeafe}
+    .muted{color:var(--muted)}
+    .counter{font-weight:700;color:#bfdbfe}
+    .skeleton{height:104px;border-radius:16px;background:linear-gradient(90deg,#0e1527 25%,#101a33 37%,#0e1527 63%);background-size:400% 100%;animation:shimmer 1.2s infinite}
+    @keyframes shimmer{0%{background-position:0 0}100%{background-position:100% 0}}
+    footer{padding:36px 0;text-align:center;color:#9fb0c8;border-top:1px solid var(--line)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="row">
+        <div class="logo">Adilet Moldabay</div>
+        <span class="tag">Confidential Listener</span>
+      </div>
+      <div class="row">
+        <a class="btn secondary" href="https://wa.me/77073398872" target="_blank">WhatsApp</a>
+        <a class="btn" href="https://calendly.com/adlet92/60min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=1d4ed8&locale=ru" target="_blank">Записаться</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="row">
+        <h1>Час свободы для мыслей</h1>
+      </div>
+      <p>Говорите всё, что хочется. Без советов и оценок — только бережное, внимательное слушание. Оплата после сессии, если почувствовали пользу.</p>
+      <div class="row langbar" id="langbar">
+        <span class="small">Язык сайта:</span>
+        <button data-lang="ru" class="active">RU</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ar">AR</button>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <section>
+      <div class="tabs">
+        <button class="tab active" data-tab="tab-reviews">Отзывы</button>
+        <button class="tab" data-tab="tab-booking">Запись</button>
+        <button class="tab" data-tab="tab-faq">FAQ</button>
+      </div>
+
+      <!-- REVIEWS -->
+      <div id="tab-reviews">
+        <div class="card">
+          <div class="toolbar">
+            <span class="muted">Источник:</span>
+            <button id="src-all" class="pill active">Все ответы</button>
+            <button id="src-approved" class="pill" style="display:none">Approved</button>
+            <span class="muted" style="margin-left:auto">Фильтр по языку:</span>
+            <button class="pill lang active" data-filter="all">All</button>
+            <button class="pill lang" data-filter="ru">RU</button>
+            <button class="pill lang" data-filter="en">EN</button>
+            <button class="pill lang" data-filter="ar">AR</button>
+          </div>
+
+          <div class="toolbar">
+            <input id="search" class="input" placeholder="Поиск: текст, имя, город…"/>
+            <select id="sort" class="input">
+              <option value="desc">Сначала новые</option>
+              <option value="asc">Сначала старые</option>
+            </select>
+            <span class="counter" id="counter">Загрузка…</span>
+          </div>
+
+          <div id="list" class="grid grid-3">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+          </div>
+
+          <div class="toolbar" style="justify-content:center">
+            <button id="more" class="pill">Показать ещё</button>
+          </div>
+          <p class="muted" id="empty" style="display:none">Пока нет отзывов для выбранного фильтра.</p>
+        </div>
+      </div>
+
+      <!-- BOOKING -->
+      <div id="tab-booking" style="display:none">
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Онлайн‑бронирование</h3>
+            <p class="muted">Выберите удобное время. Напомню за 1 час до встречи.</p>
+            <div style="border-radius:18px;overflow:hidden">
+              <iframe src="https://calendly.com/adlet92/60min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=1d4ed8&locale=ru" width="100%" height="720" frameborder="0"></iframe>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Оставить отзыв</h3>
+            <p class="muted">Отзывы помогают другим людям решиться на разговор.</p>
+            <div style="border-radius:18px;overflow:hidden">
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfndV6SWq7t1UGm3GoXk9Wes8d1TJLF2h5X-VdloztwioSpjQ/viewform?embedded=true" width="100%" height="720" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div id="tab-faq" style="display:none">
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Как проходит сессия?</h3>
+            <p>Созваниваемся в Zoom/WhatsApp/телефон. Первые минуты — настрой, затем основная тема. В конце закрепляем, что было ценным.</p>
+          </div>
+          <div class="card">
+            <h3>Конфиденциальность</h3>
+            <p>Никаких записей и пересказов. Вы можете не называть имя и скрыть камеру. Я здесь, чтобы слышать и поддерживать.</p>
+          </div>
+          <div class="card">
+            <h3>Оплата</h3>
+            <p>После сессии. Если не помог — не платите. Если помог — 1000 AED / 60 минут. Для студентов — скидка.</p>
+          </div>
+          <div class="card">
+            <h3>Языки</h3>
+            <p>Русский, английский, арабский. Переключатель — вверху страницы.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© Adilet Moldabay · Confidential Listener — {"ULTRA"}</footer>
+
+  <script>
+    // ---------- LocalStorage helpers ----------
+    const store = (k,v)=>localStorage.setItem(k,v);
+    const read = (k,def=null)=>localStorage.getItem(k)||def;
+
+    // ---------- Tabs ----------
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(t=>t.addEventListener('click',()=>{
+      tabs.forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      ['tab-reviews','tab-booking','tab-faq'].forEach(id=>document.getElementById(id).style.display='none');
+      document.getElementById(t.dataset.tab).style.display='block';
+      store('tab', t.dataset.tab);
+    }));
+    const savedTab = read('tab','tab-reviews');
+    document.querySelector(`.tab[data-tab="{savedTab}"]`)?.click();
+
+    // ---------- Language UI (site) ----------
+    const siteLangButtons = document.querySelectorAll('#langbar button');
+    function setSiteLang(l){ siteLangButtons.forEach(b=>b.classList.toggle('active', b.dataset.lang===l)); store('site_lang', l); }
+    siteLangButtons.forEach(b=>b.addEventListener('click',()=>setSiteLang(b.dataset.lang)));
+    setSiteLang(read('site_lang','ru'));
+
+    // ---------- Reviews logic ----------
+    const CSV_ALL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5vMEvEX5HpxYmCfJf7TswBxZll-7vGt2g5dIbJB0AIV_naVLg3_0aFHJD6tQVzbs2ygPo_uwfLjQh/pub?output=csv";
+    const CSV_APPROVED = ""; // можно заполнить позже
+    const PAGE = 6;
+
+    let all = []; // исходный CSV (с заголовками)
+    let view = []; // отфильтрованные строки (без заголовка)
+    let page = 1;
+    let lang = read('filter_lang','all');
+    let sortDir = read('sort','desc');
+    let query = '';
+
+    const list = document.getElementById('list');
+    const more = document.getElementById('more');
+    const empty = document.getElementById('empty');
+    const counter = document.getElementById('counter');
+
+    const srcAll = document.getElementById('src-all');
+    const srcApr = document.getElementById('src-approved');
+    let currentSrc = read('src','all');
+    if(!CSV_APPROVED) { currentSrc = 'all'; store('src','all'); srcApr?.setAttribute('disabled',''); }
+
+    function parseCSV(text) {
+      return text.trim().split(/\r?\n/).map(row =>
+        row.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(v => v.replace(/^"|"$/g, ''))
+      );
+    }
+    function idx(h) { // smart header indexer
+      return {
+        ts: h.findIndex(x=>/time|timestamp|время|дата/i.test(x)),
+        name: h.findIndex(x=>/имя|name/i.test(x)),
+        city: h.findIndex(x=>/город|city/i.test(x)),
+        lang: h.findIndex(x=>/язык|lang/i.test(x)),
+        text: h.findIndex(x=>/отзыв|review|feedback|текст/i.test(x)),
+        rating: h.findIndex(x=>/оценка|rating|stars?/i.test(x)),
+      };
+    }
+    const norm = s => (s||'').toString().toLowerCase();
+
+    async function loadCSV(url){
+      counter.textContent = 'Загрузка…';
+      list.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+      try{
+        const res = await fetch(url, {cache:'no-store'});
+        const txt = await res.text();
+        all = parseCSV(txt);
+        apply();
+      }catch(e){
+        list.innerHTML = '<div class="card">Не удалось загрузить отзывы. Проверьте публикацию CSV.</div>';
+        counter.textContent = 'Ошибка загрузки';
+      }
+    }
+
+    function apply(){
+      if(!all.length) return;
+      const header = all[0];
+      const id = idx(header);
+      let rows = all.slice(1);
+
+      if(lang!=='all' && id.lang!==-1) rows = rows.filter(r=> norm(r[id.lang])===lang );
+      const q = norm(query);
+      if(q) rows = rows.filter(r=> {
+        const t = norm(id.text!==-1? r[id.text]:'');
+        const n = norm(id.name!==-1? r[id.name]:'');
+        const c = norm(id.city!==-1? r[id.city]:'');
+        return t.includes(q)||n.includes(q)||c.includes(q);
+      });
+      if(sortDir==='desc') rows = rows.reverse();
+
+      view = rows; page=1;
+      render(); updateCounter();
+    }
+
+    function updateCounter(){
+      counter.textContent = 'Найдено: ' + view.length;
+    }
+
+    function render(){
+      list.innerHTML=''; empty.style.display='none';
+      if(!view.length){ empty.style.display='block'; more.style.display='none'; return; }
+      const header = all[0]; const id = idx(header);
+      const end = Math.min(page*PAGE, view.length);
+      for(let i=0;i<end;i++){
+        const r = view[i];
+        const text = (id.text!==-1? r[id.text]:'');
+        const name = (id.name!==-1? r[id.name]:'Анонимно');
+        const city = (id.city!==-1? r[id.city]:'');
+        const langv = (id.lang!==-1? r[id.lang]:'');
+        const ts = (id.ts!==-1? r[id.ts]:'');
+        const rating = (id.rating!==-1? r[id.rating]:'');
+
+        const stars = (s=>{const n=parseInt(s)||0;return '★'.repeat(Math.min(n,5)) + '☆'.repeat(5-Math.min(n,5));})(rating);
+
+        const el = document.createElement('div');
+        el.className='card';
+        el.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <strong>${name}</strong>
+            <span class="small">${ts}</span>
+          </div>
+          <p class="quote">“${text.replace(/"/g,'&quot;')}”</p>
+          <div class="small" style="display:flex;gap:10px;align-items:center;margin-top:8px">
+            <span>${city}</span>
+            <span>${langv}</span>
+            <span style="letter-spacing:1px;color:#fde68a">${stars}</span>
+          </div>
+        `;
+        list.appendChild(el);
+      }
+      more.style.display = (end<view.length)?'inline-flex':'none';
+    }
+
+    // UI bindings
+    document.querySelectorAll('.lang').forEach(b=>b.addEventListener('click',()=>{ 
+      document.querySelectorAll('.lang').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); lang=b.dataset.filter; store('filter_lang',lang); apply();
+    }));
+    document.getElementById('search').addEventListener('input', e=>{ query=e.target.value; apply(); });
+    document.getElementById('sort').addEventListener('change', e=>{ sortDir=e.target.value; store('sort',sortDir); apply(); });
+    more.addEventListener('click', ()=>{ page++; render(); });
+
+    // Source switch
+    function setSource(src){
+      currentSrc = src; store('src',src);
+      srcAll.classList.toggle('active',src==='all');
+      srcApr.classList.toggle('active',src==='apr');
+      loadCSV(src==='apr' && CSV_APPROVED? CSV_APPROVED : CSV_ALL);
+    }
+    srcAll.addEventListener('click',()=>setSource('all'));
+    if(srcApr) srcApr.addEventListener('click',()=>setSource('apr'));
+
+    // Init
+    document.querySelector(`.pill.lang[data-filter="{lang}"]`)?.click();
+    document.getElementById('sort').value = sortDir;
+    setSource(currentSrc);
+  </script>
+</body>
+</html>
